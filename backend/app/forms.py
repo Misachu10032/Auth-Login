@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Length, ValidationError
-from db_utils import if_username_exist
+from .db_utils import if_username_exist
 
 
 class SignUpForm(FlaskForm):

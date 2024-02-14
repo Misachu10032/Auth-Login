@@ -10,3 +10,4 @@ class User(UserMixin):
     @staticmethod
     def check_password(saved_password, provided_password):
         return saved_password == provided_password
+#add hash later for security

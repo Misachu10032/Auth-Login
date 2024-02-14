@@ -1,5 +1,4 @@
-from app import mysql  # Assuming 'mysql' is your MySQL connection object
-
+from app import mysql
 
 def create_user(username, password, firstname, lastname, email):
     cursor = mysql.connection.cursor()

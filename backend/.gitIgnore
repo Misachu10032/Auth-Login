@@ -1,0 +1,36 @@
+# Byte-compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Python cache
+*.pyc
+
+# Virtual environment
+venv/
+env/
+
+# IDE specific files
+.vscode/
+.idea/
+
+# Flask configuration
+instance/
+
+# Logs
+*.log
+
+# Compiled Python files
+*.pyc
+
+# Dependency directories
+lib/
+lib64/
+local/
+build/
+dist/
+node_modules/
+
+# Environment variables file
+.env

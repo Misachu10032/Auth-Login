@@ -1,0 +1,44 @@
+from flask import request, jsonify
+from flask_login import login_user, logout_user, login_required, current_user
+from app import app
+from db_utils import create_user, get_user_by_username
+from authentication import User
+from forms import SignUpForm, LoginForm
+
+
+@app.route('/api/sign_up', methods=['POST'])
+def sign_up():
+
+    form = SignUpForm(request.form)
+    if form.validate_username() and form.validate():
+        create_user(form.username.data,
+                    form.password.data,
+                    form.firstname.data,
+                    form.lastname.data,
+                    form.email.data,)
+        return jsonify({'message': 'Signed up successfully'}), 201
+    return jsonify({'message': form.errors}), 400
+
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    form = LoginForm(request.form)
+    if form.validate():
+
+        user_data = get_user_by_username(form.username)
+
+        if user_data and User.check_password(user_data['password'], form.password.data):
+            user = User(username=user_data['username'],
+                        password=user_data['password'])
+            login_user(user)
+            return jsonify({'message': 'Login successful'}), 200
+        else:
+            return jsonify({'error': 'Invalid username or password'}), 401
+    return jsonify({'error': form.errors}), 400
+
+
+@app.route('/api/logout')
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'message': 'Logout successful'})

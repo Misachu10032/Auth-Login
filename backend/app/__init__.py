@@ -1,13 +1,17 @@
-from flask import Flask
-from flask_login import LoginManager
+from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_mysqldb import MySQL
+
+from .db_utils import test
 
 app = Flask(__name__)
-app.config.from_pyfile('config.py')
-mysql = MySQL(app)
-login_manager = LoginManager(app)
+
 CORS(app)
 
 
-from app import routes
+@app.route('/api/abc', methods=['GET'])
+def sdadsad():
+    aa = 'aa'
+    cc=test(aa)
+    print(cc)
+
+    return jsonify({'message': 'logged in'}), 200

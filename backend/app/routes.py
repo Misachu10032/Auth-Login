@@ -10,7 +10,7 @@ from .forms import SignUpForm, LoginForm
 def sign_up():
 
     form = SignUpForm(request.form)
-    if form.validate_username() and form.validate():
+    if form.validate_username(form.username.data):
         create_user(form.username.data,
                     form.password.data,
                     form.firstname.data,
@@ -24,7 +24,7 @@ def sign_up():
 def login():
     form = LoginForm(request.form)
     if form.validate():
-
+        
         user_data = get_user_by_username(form.username)
 
         if user_data and User.check_password(user_data['password'], form.password.data):
@@ -47,6 +47,17 @@ def logout():
 
 @app.route('/api/current_user', methods=['GET'])
 def current_user_exist():
+  print("sdasd")
   if current_user.is_authenticated:
     return jsonify({'message':'loged in'}), 200
   return jsonify({'message':'log in required'}), 400
+
+
+@app.route('/api/aaa', methods=['GET'])
+def sdadsad():
+  print("sdasd cjecl")
+  user = User(username='username',
+                password='password',user_id='username')
+  login_user(user)
+  return jsonify({'message':'loged in'}), 200
+ 

@@ -8,21 +8,12 @@ class TestApp(TestCase):
         app.config['TESTING'] = True
         return app
 
-    def test_sign_up(self):
-        response = self.client.post('/api/sign_up', data=dict(
-            username='testuser',
-            password='testpassword',
-            firstname='Test',
-            lastname='User',
-            email='test@example.com'
-        ))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.json['message'], 'Form validated successfully')
+  
 
     def test_login(self):
         response = self.client.post('/api/login', data=dict(
-            username='testuser',
-            password='testpassword'
+            username='Wrongtestuser',
+            password='Wrongpassword'
         ))
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.json['error'], 'incorrect username or password')

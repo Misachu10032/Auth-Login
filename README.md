@@ -1,4 +1,4 @@
-# This project is built for Mekong IT Services in order to get interviewed
+# This project is built for Foghlaim Meaisin Software in order to get interviewed
 ## Getting Started 
 1. navigate to frontend and backend folder. Use `npm install` and `pip install -r requirements.txt` to install dependency respectively.
 2. Set up my SQL database and change the default `configuration under backend/app/db_utils.py`

@@ -1,15 +1,13 @@
 from flask_login import UserMixin
+from .db_utils import get_user_by_username
+
+def validate_password_and_get_user(username, password):
+    user_data = get_user_by_username(username)
+    if user_data is not None and user_data.get('password') == password :
+        return user_data
+    else:
+        return None
 
 
-class User(UserMixin):
-    def __init__(self, user_id, username, password):
-        self.id = user_id
-        self.username = username
-        self.password = password
 
-    @staticmethod
-    def check_password(saved_password, provided_password):
-        return saved_password == provided_password
-    
-
-#add hash later for security
+# add hash later for security

@@ -1,7 +1,8 @@
 from wtforms import Form, StringField, PasswordField, validators
 from wtforms.validators import DataRequired, Length, ValidationError
-from .db_utils import if_username_exist,get_user_by_username
+from .db_utils import if_username_exist
 
+#Rest Input validation
 class SignUpForm(Form):
     print('sdacca')
     username = StringField('Username', validators=[
@@ -31,18 +32,4 @@ class LoginForm(Form):
                            DataRequired(), Length(min=2, max=20)])
     password = StringField('Password', validators=[DataRequired()])
 
-    def validate_password(form, field):
-        print('we heres password before')
-
-        username= form.username.data
-        
-        password = field.data
-
-        print(username,password)
-
-        user_data = get_user_by_username(username)
-        print(user_data['password'],'zcsadas')
-        if user_data['password'] != password :
-            print('we heres password')
-            raise ValidationError('password wrong')
 

@@ -105,3 +105,35 @@ def get_all_products_from_db():
     finally:
         cursor.close()
         connection.close()
+
+def get_user_by_id_from_db(user_id):
+    connection = get_mysql_connection()
+    cursor = connection.cursor(dictionary=True)
+
+    try:
+        cursor.execute("SELECT * FROM user WHERE ID = %s", (user_id,))
+        user_data = cursor.fetchone()
+        print(user_data,"DBBBBBBBBBBBB")
+        if user_data:
+            return user_data
+    except mysql.connector.Error as err:
+        # Handle any MySQL errors
+        print(f"Error: {err}")
+    finally:
+        cursor.close()
+        connection.close()
+
+def delete_user_by_id_from_db(user_id):
+    connection = get_mysql_connection()
+    cursor = connection.cursor()
+
+    try:
+        cursor.execute("DELETE FROM user WHERE ID = %s", (user_id,))
+        connection.commit()
+        print(f"User with ID {user_id} deleted successfully")
+    except mysql.connector.Error as err:
+        # Handle any MySQL errors
+        print(f"Error: {err}")
+    finally:
+        cursor.close()
+        connection.close()

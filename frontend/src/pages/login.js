@@ -7,7 +7,7 @@ import { loginUser } from '../api';
 import SignUpModal from '../component/modal/signUpModal';
 
 const Login = () => {
-  const { isLoggedIn, isAdmintUser, login, userIsAdmin } = useAuth();
+  const { login  } = useAuth();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,6 +17,8 @@ const Login = () => {
   const openModal = () => setModalIsOpen(true);
   const closeModal = () => setModalIsOpen(false);
 
+  //This will set a userId in the local storage on success login. To be a bit more sophisticated, an auth token should be store and can be used to
+  // to fetch user info on the home page
   const handleLogin = async () => {
     try {
       const loginForm = new FormData();

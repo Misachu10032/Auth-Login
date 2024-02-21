@@ -15,6 +15,8 @@ const Home = () => {
   const [selectedMenu, setSelectedMenu] = useState(null);
   const [error, setError] = useState('');
 
+  //use the userId in local storage to fetch the User info first. 
+  //Return login please, if there is no userID in the local storage
   useEffect(() => {
 
     const checkCurrentUser = async () => {
